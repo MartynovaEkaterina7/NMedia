@@ -42,12 +42,14 @@
         app:layout_constraintTop_toBottomOf="@id/author"
         tools:text="@sample/posts.json/data/published" />
 
-    <ImageView
+    <ImageButton
         android:id="@+id/menu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:contentDescription="@string/description_post_menu"
+        android:background="@android:color/transparent"
         app:srcCompat="@drawable/ic_more_vert_24"
+        android:layout_marginBottom="@dimen/common_spacing"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
@@ -61,8 +63,10 @@
     <TextView
         android:id="@+id/content"
         android:layout_marginVertical="@dimen/common_spacing"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/barrier"
         tools:text="@sample/posts.json/data/content" />
 
@@ -73,13 +77,14 @@
         app:barrierDirection="bottom"
         app:constraint_referenced_ids="content" />
 
-    <ImageView
+    <ImageButton
         android:id="@+id/like"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:contentDescription="@string/description_post_likes"
+        android:background="@android:color/transparent"
         android:layout_marginVertical="@dimen/common_spacing"
-        app:srcCompat="@drawable/ic_heart_24"
+        app:srcCompat="@drawable/ic_like_24"
         app:layout_constraintTop_toTopOf="@id/barrierContent"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -92,14 +97,15 @@
         app:layout_constraintStart_toEndOf="@id/like"
         android:text="100" />
 
-    <ImageView
+    <ImageButton
         android:id="@+id/repost"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:contentDescription="@string/description_post_reposts"
+        android:background="@android:color/transparent"
         android:layout_marginVertical="@dimen/common_spacing"
         android:layout_marginHorizontal="@dimen/common_spacing"
-        app:srcCompat="@drawable/ic_share_24"
+        app:srcCompat="@drawable/ic_shared_24"
         app:layout_constraintTop_toTopOf="@id/barrierContent"
         app:layout_constraintStart_toEndOf="@id/countLikes" />
 
@@ -120,11 +126,12 @@
         app:layout_constraintTop_toTopOf="@id/view"
         android:text="502" />
 
-    <ImageView
+    <ImageButton
         android:id="@+id/view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:contentDescription="@string/description_post_views"
+        android:background="@android:color/transparent"
         android:layout_marginVertical="@dimen/common_spacing"
         android:layout_marginEnd="@dimen/common_margin"
         app:srcCompat="@drawable/ic_eye_24"
