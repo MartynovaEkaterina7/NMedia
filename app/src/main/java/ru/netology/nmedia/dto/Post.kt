@@ -7,9 +7,9 @@ data class Post(
     val author: String,
     val published: String,
     val content: String,
-    val countLikes: Int = 999,
+    val countLikes: Int = 0,
     val likeByMe: Boolean = false,
-    val countReposts: Int = 302
+    val countReposts: Int = 0
 )
 
 object WallService {
