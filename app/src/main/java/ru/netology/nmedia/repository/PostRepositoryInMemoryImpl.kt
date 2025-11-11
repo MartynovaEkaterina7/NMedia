@@ -6,9 +6,10 @@ import ru.netology.nmedia.dto.Post
 
 class PostRepositoryInMemoryImpl : PostRepository {
 
+    private var nextId = 1
     private var posts = listOf(
         Post(
-            id = 5,
+            nextId++,
             author = "Нетология. Университет интернет-профессий будущего",
             content = "Знаний хватит на всех: на следующей неделе разбираемся с разработкой мобильных приложений, учимся рассказывать истории и составлять PR-стратегию прямо на бесплатных занятиях \uD83D\uDC47",
             published = "18 сентября в 10:12",
@@ -17,7 +18,7 @@ class PostRepositoryInMemoryImpl : PostRepository {
             countReposts = 80
         ),
         Post(
-            id = 4,
+            nextId++,
             author = "Нетология. Университет интернет-профессий будущего",
             content = "Знаний хватит на всех: на следующей неделе разбираемся с разработкой мобильных приложений, учимся рассказывать истории и составлять PR-стратегию прямо на бесплатных занятиях \uD83D\uDC47",
             published = "18 сентября в 10:12",
@@ -26,7 +27,7 @@ class PostRepositoryInMemoryImpl : PostRepository {
             countReposts = 80
         ),
         Post(
-            id = 3,
+            nextId++,
             author = "Нетология. Университет интернет-профессий будущего",
             content = "Знаний хватит на всех: на следующей неделе разбираемся с разработкой мобильных приложений, учимся рассказывать истории и составлять PR-стратегию прямо на бесплатных занятиях \uD83D\uDC47",
             published = "18 сентября в 10:12",
@@ -35,7 +36,7 @@ class PostRepositoryInMemoryImpl : PostRepository {
             countReposts = 60
         ),
         Post(
-            id = 2,
+            nextId++,
             author = "Нетология. Университет интернет-профессий будущего",
             content = "Знаний хватит на всех: на следующей неделе разбираемся с разработкой мобильных приложений, учимся рассказывать истории и составлять PR-стратегию прямо на бесплатных занятиях \uD83D\uDC47",
             published = "18 сентября в 10:12",
@@ -84,6 +85,30 @@ class PostRepositoryInMemoryImpl : PostRepository {
                 )
             } else {
                 post
+            }
+        }
+        data.value = posts
+    }
+
+    override fun removeById(id: Int) {
+        posts = posts.filter { post ->
+            post.id != id
+        }
+        data.value = posts
+    }
+
+    override fun save(post: Post) {
+        posts = if (post.id == 0) {
+            listOf(
+                post.copy(
+                    id = nextId++,
+                    author = "me",
+                    published = "now"
+                )
+            ) + posts
+        } else {
+            posts.map {
+                if (it.id != post.id) it else it.copy(content = post.content)
             }
         }
         data.value = posts

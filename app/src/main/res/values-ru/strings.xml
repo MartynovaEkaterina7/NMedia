@@ -6,4 +6,12 @@
     <string name="description_post_likes">Лайки поста</string>
     <string name="description_post_reposts">Репосты поста</string>
     <string name="description_post_views">Просмотры поста</string>
+    <string name="description_post_remove">Удалить</string>
+    <string name="post_text">Текст поста</string>
+    <string name="description_post_save">Добавление поста</string>
+    <string name="error_empty_content">Контент не может быть пустым</string>
+    <string name="description_post_edit">Изменить</string>
+    <string name="description_pencil">Карандаш</string>
+    <string name="edit_message">Редактирование</string>
+    <string name="description_post_edit_cancel">Отменить</string>
 </resources>

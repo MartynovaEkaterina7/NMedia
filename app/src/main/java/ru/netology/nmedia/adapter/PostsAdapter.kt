@@ -1,7 +1,9 @@
 package ru.netology.nmedia.adapter
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.PopupMenu
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -10,13 +12,15 @@ import ru.netology.nmedia.databinding.CardPostBinding
 import ru.netology.nmedia.dto.Post
 import ru.netology.nmedia.dto.WallService
 
-
-typealias OnLikeListener = (post: Post) -> Unit
-typealias OnRepostListener = (post: Post) -> Unit
+interface OnInteractionListener {
+    fun like(post: Post)
+    fun repost(post: Post)
+    fun remove(post: Post)
+    fun edit(post: Post)
+}
 
 class PostsAdapter(
-    private val onLikeListener: OnLikeListener,
-    private val onRepostListener: OnRepostListener
+    private val onInteractionListener: OnInteractionListener,
 ) : ListAdapter<Post, PostViewHolder>(PostDiffCalback) {
 
     override fun onCreateViewHolder(
@@ -24,7 +28,7 @@ class PostsAdapter(
         viewType: Int
     ): PostViewHolder {
         val binding = CardPostBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return PostViewHolder(binding, onLikeListener, onRepostListener)
+        return PostViewHolder(binding, onInteractionListener)
     }
 
     override fun onBindViewHolder(holder: PostViewHolder, position: Int) {
@@ -36,8 +40,7 @@ class PostsAdapter(
 
 class PostViewHolder(
     private val binding: CardPostBinding,
-    private val onLikeListener: OnLikeListener,
-    private val onRepostListener: OnRepostListener
+    private val onInteractionListener: OnInteractionListener
 ) : RecyclerView.ViewHolder(binding.root) {
     fun bind(post: Post) {
         binding.apply {
@@ -51,10 +54,30 @@ class PostViewHolder(
             countReposts.text = WallService.textForCounts(post.countReposts)
 
             like.setOnClickListener {
-                onLikeListener(post)
+                onInteractionListener.like(post)
             }
             repost.setOnClickListener {
-                onRepostListener(post)
+                onInteractionListener.repost(post)
+            }
+            menu.setOnClickListener {
+                PopupMenu(it.context, it).apply {
+                    inflate(R.menu.menu_post)
+                    setOnMenuItemClickListener { item ->
+                        when (item.itemId) {
+                            R.id.remove -> {
+                                onInteractionListener.remove(post)
+                                true
+                            }
+
+                            R.id.edit -> {
+                                onInteractionListener.edit(post)
+                                true
+                            }
+
+                            else -> false
+                        }
+                    }
+                }.show()
             }
         }
     }
