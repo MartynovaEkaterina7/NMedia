@@ -14,7 +14,8 @@ private val empty = Post(
     content = "",
     countLikes = 0,
     likeByMe = false,
-    countReposts = 0
+    countReposts = 0,
+    countViews = 0
 )
 class PostViewModel : ViewModel() {
     private val repository: PostRepository = PostRepositoryInMemoryImpl()
@@ -22,6 +23,7 @@ class PostViewModel : ViewModel() {
     val edited = MutableLiveData(empty)
     fun like(id: Int) = repository.likeById(id)
     fun repost(id: Int) = repository.repostById(id)
+    fun view(id: Int) = repository.viewById(id)
     fun remove(id:Int) = repository.removeById(id)
     fun save(text: String) {
         edited.value?.let { post ->

@@ -15,6 +15,7 @@ import ru.netology.nmedia.dto.WallService
 interface OnInteractionListener {
     fun like(post: Post)
     fun repost(post: Post)
+    fun view(post: Post)
     fun remove(post: Post)
     fun edit(post: Post)
 }
@@ -47,17 +48,19 @@ class PostViewHolder(
             author.text = post.author
             published.text = post.published
             content.text = post.content
-            like.setImageResource(
-                if (post.likeByMe) R.drawable.ic_set_like_24 else R.drawable.ic_like_24
-            )
-            countLikes.text = WallService.textForCounts(post.countLikes)
-            countReposts.text = WallService.textForCounts(post.countReposts)
+            like.isChecked = post.likeByMe
+            like.text = post.countLikes.toString()
+            repost.text = post.countReposts.toString()
+            view.text = post.countViews.toString()
 
             like.setOnClickListener {
                 onInteractionListener.like(post)
             }
             repost.setOnClickListener {
                 onInteractionListener.repost(post)
+            }
+            view.setOnClickListener {
+                onInteractionListener.view(post)
             }
             menu.setOnClickListener {
                 PopupMenu(it.context, it).apply {

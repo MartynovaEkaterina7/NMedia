@@ -43,16 +43,17 @@
         app:layout_constraintTop_toBottomOf="@id/author"
         tools:text="@sample/posts.json/data/published" />
 
-    <ImageButton
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/menu"
+        style="?attr/materialIconButtonStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:contentDescription="@string/description_post_menu"
         android:background="@android:color/transparent"
-        app:srcCompat="@drawable/ic_more_vert_24"
-        android:layout_marginBottom="@dimen/common_spacing"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        android:contentDescription="@string/description_post_menu"
+        app:icon="@drawable/ic_more_vert_24"
+        app:iconTint="?attr/colorControlNormal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.constraintlayout.widget.Barrier
         android:id="@+id/barrier"
@@ -78,63 +79,51 @@
         app:barrierDirection="bottom"
         app:constraint_referenced_ids="content" />
 
-    <ImageButton
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/like"
+        style="@style/Widget.AppTheme.LikeButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        app:icon="@drawable/like_selector"
         android:contentDescription="@string/description_post_likes"
-        android:background="@android:color/transparent"
-        android:layout_marginVertical="@dimen/common_spacing"
-        app:srcCompat="@drawable/ic_like_24"
-        app:layout_constraintTop_toTopOf="@id/barrierContent"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:minWidth="0dp"
+        app:iconPadding="4dp"
+        android:checkable="true"
+        android:layout_marginTop="@dimen/common_spacing"
+        app:layout_constraintTop_toBottomOf="@id/barrierContent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:text="10" />
 
-    <TextView
-        android:id="@+id/countLikes"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/common_margin"
-        app:layout_constraintTop_toTopOf="@id/like"
-        app:layout_constraintStart_toEndOf="@id/like" />
-
-    <ImageButton
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/repost"
+        style="?attr/materialIconButtonStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        app:iconTint="?attr/colorControlNormal"
+        app:icon="@drawable/ic_shared_24"
+        android:minWidth="0dp"
+        app:iconPadding="4dp"
         android:contentDescription="@string/description_post_reposts"
-        android:background="@android:color/transparent"
-        android:layout_marginVertical="@dimen/common_spacing"
-        android:layout_marginHorizontal="@dimen/common_spacing"
-        app:srcCompat="@drawable/ic_shared_24"
+        android:layout_marginTop="@dimen/common_spacing"
         app:layout_constraintTop_toTopOf="@id/barrierContent"
-        app:layout_constraintStart_toEndOf="@id/countLikes" />
+        app:layout_constraintStart_toEndOf="@id/like"
+        android:textColor="?attr/colorControlNormal"
+        tools:text="25"/>
 
-    <TextView
-        android:id="@+id/countReposts"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/common_margin"
-        app:layout_constraintTop_toTopOf="@id/repost"
-        app:layout_constraintStart_toEndOf="@id/repost" />
-
-    <TextView
-        android:id="@+id/countViews"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/view"
-        android:text="502"/>
-
-    <ImageButton
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/view"
+        style="?attr/materialIconButtonStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        app:iconTint="?attr/colorControlNormal"
+        app:icon="@drawable/ic_eye_24"
+        android:minWidth="0dp"
+        app:iconPadding="4dp"
         android:contentDescription="@string/description_post_views"
-        android:background="@android:color/transparent"
-        android:layout_marginVertical="@dimen/common_spacing"
-        android:layout_marginEnd="@dimen/common_margin"
-        app:srcCompat="@drawable/ic_eye_24"
+        android:layout_marginTop="@dimen/common_spacing"
         app:layout_constraintTop_toTopOf="@id/barrierContent"
-        app:layout_constraintEnd_toStartOf="@id/countViews" />
+        app:layout_constraintEnd_toEndOf="parent"
+        android:textColor="?attr/colorControlNormal"
+        tools:text="502"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

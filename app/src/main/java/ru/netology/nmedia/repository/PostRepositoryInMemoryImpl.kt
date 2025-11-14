@@ -15,7 +15,8 @@ class PostRepositoryInMemoryImpl : PostRepository {
             published = "18 сентября в 10:12",
             countLikes = 85,
             likeByMe = false,
-            countReposts = 80
+            countReposts = 80,
+            countViews = 91
         ),
         Post(
             nextId++,
@@ -24,7 +25,8 @@ class PostRepositoryInMemoryImpl : PostRepository {
             published = "18 сентября в 10:12",
             countLikes = 45,
             likeByMe = false,
-            countReposts = 80
+            countReposts = 80,
+            countViews = 82
         ),
         Post(
             nextId++,
@@ -33,7 +35,8 @@ class PostRepositoryInMemoryImpl : PostRepository {
             published = "18 сентября в 10:12",
             countLikes = 10,
             likeByMe = false,
-            countReposts = 60
+            countReposts = 60,
+            countViews = 74
         ),
         Post(
             nextId++,
@@ -42,7 +45,8 @@ class PostRepositoryInMemoryImpl : PostRepository {
             published = "18 сентября в 10:12",
             countLikes = 20,
             likeByMe = false,
-            countReposts = 30
+            countReposts = 30,
+            countViews = 45
         ),
         Post(
             id = 1,
@@ -51,7 +55,8 @@ class PostRepositoryInMemoryImpl : PostRepository {
             content = "Привет, это новая Нетология! Когда-то Нетология начиналась с интенсивов по онлайн-маркетингу. Затем появились курсы по дизайну, разработке, аналитике и управлению. Мы растём сами и помогаем расти студентам: от новичков до уверенных профессионалов. Но самое важное остаётся с нами: мы верим, что в каждом уже есть сила, которая заставляет хотеть больше, целиться выше, бежать быстрее. Наша миссия — помочь встать на путь роста и начать цепочку перемен → http://netolo.gy/fyb",
             countLikes = 30,
             likeByMe = false,
-            countReposts = 50
+            countReposts = 50,
+            countViews = 63
         )
     )
 
@@ -82,6 +87,19 @@ class PostRepositoryInMemoryImpl : PostRepository {
             if (post.id == id) {
                 post.copy(
                     countReposts = post.countReposts + 1
+                )
+            } else {
+                post
+            }
+        }
+        data.value = posts
+    }
+
+    override fun viewById(id: Int) {
+        posts = posts.map { post ->
+            if (post.id == id) {
+                post.copy(
+                    countViews = post.countViews + 1
                 )
             } else {
                 post

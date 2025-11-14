@@ -30,6 +30,10 @@ class MainActivity : AppCompatActivity() {
                 viewModel.repost(post.id)
             }
 
+            override fun view(post: Post) {
+                viewModel.view(post.id)
+            }
+
             override fun remove(post: Post) {
                 viewModel.remove(post.id)
             }
