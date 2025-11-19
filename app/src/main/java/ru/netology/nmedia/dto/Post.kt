@@ -1,6 +1,7 @@
 package ru.netology.nmedia.dto
 
 import android.icu.text.DecimalFormat
+import androidx.annotation.Nullable
 
 data class Post(
     val id: Int,
@@ -10,7 +11,8 @@ data class Post(
     val countLikes: Int = 0,
     val likeByMe: Boolean = false,
     val countReposts: Int = 0,
-    val countViews: Int = 0
+    val countViews: Int = 0,
+    val video: String? = null
 )
 
 object WallService {

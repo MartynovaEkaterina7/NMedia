@@ -13,4 +13,6 @@
     <string name="description_pencil">Pencil</string>
     <string name="edit_message">Edit Message</string>
     <string name="description_post_edit_cancel">Сancel</string>
+    <string name="chooser_repost_post">Repost post</string>
+    <string name="play_video">Play video</string>
 </resources>

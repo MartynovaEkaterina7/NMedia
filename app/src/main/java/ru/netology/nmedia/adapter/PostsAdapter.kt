@@ -18,6 +18,7 @@ interface OnInteractionListener {
     fun view(post: Post)
     fun remove(post: Post)
     fun edit(post: Post)
+    fun playVideo(post: Post)
 }
 
 class PostsAdapter(
@@ -52,6 +53,9 @@ class PostViewHolder(
             like.text = post.countLikes.toString()
             repost.text = post.countReposts.toString()
             view.text = post.countViews.toString()
+            if (post.video != null) {
+                videoGroup.visibility = View.VISIBLE
+            }
 
             like.setOnClickListener {
                 onInteractionListener.like(post)
@@ -61,6 +65,9 @@ class PostViewHolder(
             }
             view.setOnClickListener {
                 onInteractionListener.view(post)
+            }
+            previewVideo.setOnClickListener {
+                onInteractionListener.playVideo(post)
             }
             menu.setOnClickListener {
                 PopupMenu(it.context, it).apply {

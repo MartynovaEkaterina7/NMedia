@@ -1,10 +1,13 @@
 package ru.netology.nmedia.activity
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.activity.result.launch
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.net.toUri
 import ru.netology.nmedia.R
 import ru.netology.nmedia.adapter.OnInteractionListener
 import ru.netology.nmedia.adapter.PostsAdapter
@@ -19,15 +22,24 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         val binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
         val viewModel: PostViewModel by viewModels()
+        val newPostLauncher = registerForActivityResult(NewPostContract) { result ->
+            result ?: return@registerForActivityResult
+            viewModel.save(result)
+        }
         val adapter = PostsAdapter(object : OnInteractionListener {
             override fun like(post: Post) {
                 viewModel.like(post.id)
             }
 
             override fun repost(post: Post) {
-                viewModel.repost(post.id)
+                val intent = Intent().apply {
+                    action = Intent.ACTION_SEND
+                    type = "text/plain"
+                    putExtra(Intent.EXTRA_TEXT, post.content)
+                }
+                val chooser = Intent.createChooser(intent, getString(R.string.chooser_repost_post))
+                startActivity(chooser)
             }
 
             override fun view(post: Post) {
@@ -38,7 +50,16 @@ class MainActivity : AppCompatActivity() {
                 viewModel.remove(post.id)
             }
 
+            override fun playVideo(post: Post) {
+                val intent = Intent().apply {
+                    action = Intent.ACTION_VIEW
+                    data = post.video?.toUri()
+                }
+                startActivity(intent)
+            }
+
             override fun edit(post: Post) {
+                newPostLauncher.launch(post.content)
                 viewModel.edit(post)
             }
         })
@@ -51,34 +72,8 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
-        viewModel.edited.observe(this) {
-            if (it.id != 0) {
-                binding.content.setText(it.content)
-                binding.editGroup.visibility = View.VISIBLE
-                binding.editContent.setText(it.content)
-                AndroidUtils.showKeyboard(binding.content)
-            }
-        }
-
-        binding.save.setOnClickListener {
-            val text = binding.content.text.toString()
-            if (text.isBlank()) {
-                Toast.makeText(this@MainActivity, R.string.error_empty_content, Toast.LENGTH_LONG).show()
-                return@setOnClickListener
-            }
-            viewModel.save(text)
-            binding.content.setText("")
-            binding.content.clearFocus()
-            binding.editGroup.visibility = View.GONE
-            AndroidUtils.hideKeyboard(binding.content)
-
-        }
-        binding.cancel.setOnClickListener {
-            viewModel.cancel()
-            binding.content.setText("")
-            binding.content.clearFocus()
-            binding.editGroup.visibility = View.GONE
-            AndroidUtils.hideKeyboard(binding.content)
+        binding.add.setOnClickListener {
+            newPostLauncher.launch(null)
         }
     }
 }

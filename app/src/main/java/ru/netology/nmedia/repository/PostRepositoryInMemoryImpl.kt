@@ -16,7 +16,8 @@ class PostRepositoryInMemoryImpl : PostRepository {
             countLikes = 85,
             likeByMe = false,
             countReposts = 80,
-            countViews = 91
+            countViews = 91,
+            video = "https://rutube.ru/video/6550a91e7e523f9503bed47e4c46d0cb"
         ),
         Post(
             nextId++,
@@ -36,7 +37,9 @@ class PostRepositoryInMemoryImpl : PostRepository {
             countLikes = 10,
             likeByMe = false,
             countReposts = 60,
-            countViews = 74
+            countViews = 74,
+            video = "https://rutube.ru/video/6550a91e7e523f9503bed47e4c46d0cb"
+
         ),
         Post(
             nextId++,
@@ -56,7 +59,8 @@ class PostRepositoryInMemoryImpl : PostRepository {
             countLikes = 30,
             likeByMe = false,
             countReposts = 50,
-            countViews = 63
+            countViews = 63,
+            video = "https://rutube.ru/video/6550a91e7e523f9503bed47e4c46d0cb"
         )
     )
 
@@ -131,4 +135,5 @@ class PostRepositoryInMemoryImpl : PostRepository {
         }
         data.value = posts
     }
+
 }

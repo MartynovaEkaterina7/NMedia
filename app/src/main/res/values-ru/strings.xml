@@ -14,4 +14,6 @@
     <string name="description_pencil">Карандаш</string>
     <string name="edit_message">Редактирование</string>
     <string name="description_post_edit_cancel">Отменить</string>
+    <string name="chooser_repost_post">Поделиться постом</string>
+    <string name="play_video">Включить видео</string>
 </resources>
