@@ -55,6 +55,8 @@ class PostViewHolder(
             view.text = post.countViews.toString()
             if (post.video != null) {
                 videoGroup.visibility = View.VISIBLE
+            } else {
+                videoGroup.visibility = View.GONE
             }
 
             like.setOnClickListener {

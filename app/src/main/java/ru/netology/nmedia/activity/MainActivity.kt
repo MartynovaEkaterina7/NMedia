@@ -24,8 +24,12 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         val viewModel: PostViewModel by viewModels()
         val newPostLauncher = registerForActivityResult(NewPostContract) { result ->
-            result ?: return@registerForActivityResult
-            viewModel.save(result)
+            if (result == null) {
+                viewModel.cancel()
+                return@registerForActivityResult
+            } else {
+                viewModel.save(result)
+            }
         }
         val adapter = PostsAdapter(object : OnInteractionListener {
             override fun like(post: Post) {
