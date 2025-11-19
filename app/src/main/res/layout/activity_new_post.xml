@@ -10,7 +10,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:clipToPadding="false"
-        android:paddingBottom="100dp"></androidx.core.widget.NestedScrollView>
+        android:paddingBottom="100dp">
+
+    </androidx.core.widget.NestedScrollView>
 
 
     <EditText
